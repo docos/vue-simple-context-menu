@@ -56,10 +56,10 @@ var script = {
         menu.style.left = (pageX - 2) + "px";
       }
 
-      if ((this.menuHeight + pageX) >= window.innerHeight) {
-        menu.style.top = (pageX - this.menuHeight + 2) + "px";
+      if ((this.menuHeight + pageY) >= window.innerHeight) {
+        menu.style.top = (pageY - this.menuHeight + 2) + "px";
       } else {
-        menu.style.top = (pageX - 2) + "px";
+        menu.style.top = (pageY - 2) + "px";
       }
 
       menu.classList.add('vue-simple-context-menu--active');
