@@ -51,6 +51,16 @@ export default {
       if (!menu) {
         return
       }
+      var pageX = event.pageX
+      var pageY = event.pageY;
+      if(menu.offsetParent){
+        if( !isNaN(parseInt(menu.offsetParent.offsetLeft))){
+          pageX = pageX -parseInt(menu.offsetParent.offsetLeft)
+        }
+        if( !isNaN(parseInt(menu.offsetParent.offsetTop))){
+          pageY = pageY -parseInt(menu.offsetParent.offsetTop)
+        }
+      }
 
       if (!this.menuWidth || !this.menuHeight) {
         menu.style.visibility = "hidden"
@@ -60,16 +70,16 @@ export default {
         menu.removeAttribute("style")
       }
 
-      if ((this.menuWidth + event.pageX) >= window.innerWidth) {
-        menu.style.left = (event.pageX - this.menuWidth + 2) + "px"
+      if ((this.menuWidth + pageX) >= window.innerWidth) {
+        menu.style.left = (pageX - this.menuWidth + 2) + "px"
       } else {
-        menu.style.left = (event.pageX - 2) + "px"
+        menu.style.left = (pageX - 2) + "px"
       }
 
-      if ((this.menuHeight + event.pageY) >= window.innerHeight) {
-        menu.style.top = (event.pageY - this.menuHeight + 2) + "px"
+      if ((this.menuHeight + pageY) >= window.innerHeight) {
+        menu.style.top = (pageY - this.menuHeight + 2) + "px"
       } else {
-        menu.style.top = (event.pageY - 2) + "px"
+        menu.style.top = (pageY - 2) + "px"
       }
 
       menu.classList.add('vue-simple-context-menu--active')
