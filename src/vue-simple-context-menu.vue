@@ -44,22 +44,12 @@ export default {
     }
   },
   methods: {
-    showMenu (event, item) {
+    showMenu (event, item,offsetparent) {
       this.item = item
 
       var menu = document.getElementById(this.elementId)
       if (!menu) {
         return
-      }
-      var pageX = event.pageX
-      var pageY = event.pageY;
-      if(menu.offsetParent){
-        if( !isNaN(parseInt(menu.offsetParent.offsetLeft))){
-          pageX = pageX -parseInt(menu.offsetParent.offsetLeft)
-        }
-        if( !isNaN(parseInt(menu.offsetParent.offsetTop))){
-          pageY = pageY -parseInt(menu.offsetParent.offsetTop)
-        }
       }
 
       if (!this.menuWidth || !this.menuHeight) {
@@ -69,7 +59,17 @@ export default {
         this.menuHeight = menu.offsetHeight
         menu.removeAttribute("style")
       }
-
+      var pageX = event.pageX
+      var pageY = event.pageY;
+      if(!!offsetparent && !!document.getElementById(offsetparent)){
+        var offsetEle = document.getElementById(offsetparent)
+        if( !isNaN(parseInt(offsetEle.offsetLeft))){
+          pageX = pageX -parseInt(offsetEle.offsetLeft)
+        }
+        if( !isNaN(parseInt(offsetEle.offsetTop))){
+          pageY = pageY -parseInt(offsetEle.offsetTop)
+        }
+      }
       if ((this.menuWidth + pageX) >= window.innerWidth) {
         menu.style.left = (pageX - this.menuWidth + 2) + "px"
       } else {
